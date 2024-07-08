@@ -16,3 +16,11 @@ def get_even_numbers(lst):
 
     lst = [lst[i] for i in range(len(lst)) if lst[i] % 2 == 0]
     return lst
+
+
+def average_of_positive_odd_integers(lst):
+    try:
+        lst = [i for i in lst if i % 2 != 0 and i > 0]
+        return sum(lst) / len(lst)
+    except ZeroDivisionError:
+        return None
