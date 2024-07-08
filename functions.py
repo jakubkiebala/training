@@ -19,6 +19,8 @@ def get_even_numbers(lst):
 
 
 def average_of_positive_odd_integers(lst):
+    # Returns an average of positive elements of the list and None, when its 0 or empty
+
     try:
         lst = [i for i in lst if i % 2 != 0 and i > 0]
         return sum(lst) / len(lst)
