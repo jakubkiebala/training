@@ -14,7 +14,7 @@ def add_next_number(lst):
 def get_even_numbers(lst):
     # Returns a list containing the even numbers from the input list or empty list, when it's empty.
 
-    lst = [lst[i] for i in range(len(lst)) if lst[i] % 2 == 0]
+    lst = [x for x in lst if x % 2 == 0]
     return lst
 
 
