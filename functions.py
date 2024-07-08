@@ -17,12 +17,5 @@ def add_next_number(lst):
        add_next_number(lst)
        [4, 8, 11, 14, 8]
        """
-    index = 0
-    for i in lst:
-        try:
-            lst[index] = i + lst[(index + 1)]
-            index += 1
-        except IndexError:
-            break
+    lst = [lst[i] + lst[i + 1] if i < len(lst) - 1 else lst[i] for i in range(len(lst))]
     return lst
-
