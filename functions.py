@@ -1,3 +1,6 @@
+import re
+
+
 def add_next_number(lst):
     """
        Function to add the next element's value to each element in the list.
@@ -148,3 +151,24 @@ def dict_comprehensions_1(lst):
     {'Banana': 6, 'Cherry': 6, 'DOG': 3}
     """
     return {x: len(x) for x in lst if x[0].isupper() and x.isalpha()}
+
+
+def regex_1(words):
+    """
+    Finds words starting with an uppercase letter followed by one or more lowercase letters in the input string.
+
+    Parameters:
+    words (str): Input string to search for words.
+
+    Returns:
+    list: List of words matching the pattern '[A-Z][a-z]+'.
+
+    Example:
+    >>> regex_1("Hello World, Python is great!")
+    ['Hello', 'World', 'Python']
+
+    >>> regex_1("This is a Test123. Not ThisOne.")
+    ['This', 'Not']
+    """
+    pattern = r'[A-Z][a-z]+'
+    return re.findall(pattern, words)
