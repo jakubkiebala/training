@@ -26,3 +26,41 @@ def average_of_positive_odd_integers(lst):
         return sum(lst) / len(lst)
     except ZeroDivisionError:
         return None
+
+
+def process_numbers_1(lst):
+    """
+        Processes a list of integers according to specified rules.
+
+        The function returns a new list where:
+        - Positive even numbers are replaced by their square.
+        - Positive odd numbers are replaced by their cube.
+        - Negative numbers are removed.
+        - Zero remains unchanged.
+
+        Parameters:
+        lst (list of int): The list of integers to process.
+
+        Returns:
+        list of int: A new list of integers after processing.
+
+        Example:
+        >>> process_numbers_1([1, 2, -3, 0, 4, -5, 3])
+        [1, 4, 0, 16, 27]
+
+        Note:
+        - Positive even numbers are squared.
+        - Positive odd numbers are cubed.
+        - Negative numbers are removed from the list.
+        - Zero remains unchanged.
+        """
+
+    lst = [x for x in lst if type(x) is int]
+    if lst:
+        lst = [x ** 2 if x > 0 and x % 2 == 0 else
+               x ** 3 if x > 0 and x % 2 != 0 else
+               x for x in lst if x >= 0]
+        return lst
+    else:
+        print('List must contains integers')
+    return None
