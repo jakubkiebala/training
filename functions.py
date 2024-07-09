@@ -76,7 +76,8 @@ def transform_words_1(lst):
         - Words shorter than 5 characters are transformed to uppercase.
         - Empty strings are omitted.
 
-        If the input list contains non-string elements, it returns a string indicating that the list must contain strings only.
+        If the input list contains non-string elements, it returns a string indicating that the list must contain
+        strings only.
 
         Parameters:
         lst (list): The list to process, expected to contain only strings.
@@ -105,3 +106,23 @@ def transform_words_1(lst):
         return lst
     else:
         return 'List must contains strings only'
+
+
+def numbers_and_quarters(lst):
+    """
+    Returns a dictionary where the keys are numbers from the input list and the values are the squares of those numbers.
+
+    Parameters:
+    lst (list of int or float): A list of numbers.
+
+    Returns:
+    dict: A dictionary where each key is a number from the input list and the corresponding value is the square of that number.
+
+    Example:
+    >>> numbers_and_squares([1, 2, 3, 4, 5])
+    {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+
+    >>> numbers_and_squares([0, -1, 0.5])
+    {0: 0, -1: 1, 0.5: 0.25}
+    """
+    return {x: x ** 2 for x in lst}
