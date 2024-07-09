@@ -126,3 +126,25 @@ def numbers_and_quarters(lst):
     {0: 0, -1: 1, 0.5: 0.25}
     """
     return {x: x ** 2 for x in lst}
+
+
+def dict_comprehensions_1(lst):
+    """
+    Returns a dictionary where the keys are words from the input list that start with an uppercase letter
+    and consist only of alphabetic characters, and the values are the lengths of those words.
+
+    Parameters:
+    lst (list of str): A list of strings.
+
+    Returns:
+    dict: A dictionary where each key is a word from the input list that meets the criteria,
+          and the corresponding value is the length of that word.
+
+    Example:
+    >>> dict_comprehensions_1(["Hello", "world", "Python3", "Code", "123", "Test"])
+    {'Hello': 5, 'Code': 4, 'Test': 4}
+
+    >>> dict_comprehensions_1(["apple", "Banana", "1234", "Cherry", "DOG"])
+    {'Banana': 6, 'Cherry': 6, 'DOG': 3}
+    """
+    return {x: len(x) for x in lst if x[0].isupper() and x.isalpha()}
