@@ -203,3 +203,29 @@ def find_dates(text):
     """
 
     return re.findall(r'\b[0-3]\d/[0,1]\d/\d{4}\b', text)
+
+
+def validate_polish_phone_numbers(p_numbers):
+    """
+    Validate Polish phone numbers based on a specific pattern.
+
+    Parameters:
+    p_numbers (list): A list of phone numbers to validate.
+
+    Returns:
+    list: A list containing valid phone numbers based on the pattern.
+
+    The function validates phone numbers in Polish format, which may include:
+    - Optional prefix '+48 '
+    - Three digits followed by an optional separator ('-', ',' or ' ')
+    - Another three digits followed by the same optional separator
+    - Final three digits
+
+    Examples of valid numbers: '+48 123-456-789', '123 456 789', '456-789-225'
+
+    Invalid numbers will not be included in the returned list.
+
+    """
+    pattern = r'\b(\+48 )?\d{3}([-, ]?)(\d{3})\2\d{3}\b'
+    numbers = [number for number in p_numbers if re.search(pattern, number)]
+    return numbers
