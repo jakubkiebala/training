@@ -226,6 +226,7 @@ def validate_polish_phone_numbers(p_numbers):
     Invalid numbers will not be included in the returned list.
 
     """
+
     pattern = r'\b(\+48 )?\d{3}([-, ]?)(\d{3})\2\d{3}\b'
     numbers = [number for number in p_numbers if re.search(pattern, number)]
     return numbers
@@ -250,6 +251,31 @@ def validate_emails(emails):
     Note:
     - The regex pattern used for validation checks for a basic email format.
     """
+
     pattern = r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$'
     emails = [email for email in emails if re.match(pattern, email)]
     return emails
+
+
+def validate_postal_codes(codes):
+    """
+    Validates a list of Polish postal codes according to specified regex pattern.
+
+    The function returns a new list containing only valid postal codes in Poland.
+
+    Parameters:
+    codes (list of str): The list of postal codes to validate.
+
+    Returns:
+    list of str: A new list containing only valid Polish postal codes.
+
+    Example:
+    >>> validate_postal_codes(["00-000", "12345", "12-345", "12-34a", "12-3456", "12-34"])
+    ['00-000', '12-345']
+
+    Note:
+    - The regex pattern used for validation checks for the format xx-xxx.
+    """
+
+    codes = [code for code in codes if re.match(r'^[0-9]{2}-[0-9]{3}$', code)]
+    return codes
