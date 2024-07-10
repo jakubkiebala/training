@@ -15,14 +15,18 @@ def add_next_number(lst):
 
 
 def get_even_numbers(lst):
-    # Returns a list containing the even numbers from the input list or empty list, when it's empty.
+    """
+        Returns a list containing the even numbers from the input list or empty list, when it's empty.
+    """
 
     lst = [x for x in lst if x % 2 == 0]
     return lst
 
 
 def average_of_positive_odd_integers(lst):
-    # Returns an average of positive elements of the list and None, when its 0 or empty
+    """
+        Returns an average of positive elements of the list and None, when its 0 or empty
+    """
 
     try:
         lst = [i for i in lst if i % 2 != 0 and i > 0]
@@ -150,6 +154,7 @@ def dict_comprehensions_1(lst):
     >>> dict_comprehensions_1(["apple", "Banana", "1234", "Cherry", "DOG"])
     {'Banana': 6, 'Cherry': 6, 'DOG': 3}
     """
+
     return {x: len(x) for x in lst if x[0].isupper() and x.isalpha()}
 
 
@@ -170,5 +175,31 @@ def regex_1(words):
     >>> regex_1("This is a Test123. Not ThisOne.")
     ['This', 'Not']
     """
+
     pattern = r'[A-Z][a-z]+'
     return re.findall(pattern, words)
+
+
+def find_numbers_1(text):
+    """
+    Take a string text and returns a list of numbers contained in this text
+    """
+
+    pattern = r'\d+'
+    return re.findall(pattern, text)
+
+
+def regex_2(text):
+    """
+        Finds all occurrences of the word 'Ala' or 'ala' followed by zero or more lowercase letters in the given text.
+    """
+
+    return re.findall(r'[A,a]la[a-z]*', text)
+
+
+def find_dates(text):
+    """
+        Finds all dates in the text and returns them as a list
+    """
+
+    return re.findall(r'\b[0-3]\d/[0,1]\d/\d{4}\b', text)
