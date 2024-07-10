@@ -221,7 +221,7 @@ def validate_polish_phone_numbers(p_numbers):
     - Another three digits followed by the same optional separator
     - Final three digits
 
-    Examples of valid numbers: '+48 123-456-789', '123 456 789', '456-789-225'
+    Examples of valid numbers: '+48 123-456-789', '123 456 789', '456-789-225, +48 123 123 123'
 
     Invalid numbers will not be included in the returned list.
 
@@ -229,3 +229,27 @@ def validate_polish_phone_numbers(p_numbers):
     pattern = r'\b(\+48 )?\d{3}([-, ]?)(\d{3})\2\d{3}\b'
     numbers = [number for number in p_numbers if re.search(pattern, number)]
     return numbers
+
+
+def validate_emails(emails):
+    """
+    Validates a list of email addresses according to specified regex pattern.
+
+    The function returns a new list containing only valid email addresses.
+
+    Parameters:
+    emails (list of str): The list of email addresses to validate.
+
+    Returns:
+    list of str: A new list containing only valid email addresses.
+
+    Example:
+    >>> validate_emails(["test@example.com", "invalid-email", "user.name@domain.co", "user@domain", "user@domain.c"])
+    ['test@example.com', 'user.name@domain.co']
+
+    Note:
+    - The regex pattern used for validation checks for a basic email format.
+    """
+    pattern = r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z]{2,}$'
+    emails = [email for email in emails if re.match(pattern, email)]
+    return emails
