@@ -279,3 +279,15 @@ def validate_postal_codes(codes):
 
     codes = [code for code in codes if re.match(r'^[0-9]{2}-[0-9]{3}$', code)]
     return codes
+
+
+def validate_password(password):
+    pattern = r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&])[A-Za-z\d!@#$%^&]{8,}$'
+    password = re.search(pattern, password)
+    return password
+
+
+def check_quantity_of_words_with_specified_letters(text):
+    pattern = r'\b[Nn][a-z]*ar[a-z]*'
+    words = re.findall(pattern, text)
+    return words
