@@ -1,4 +1,6 @@
 import re
+import statistics
+from datetime import datetime, timedelta
 
 
 def add_next_number(lst):
@@ -291,3 +293,56 @@ def check_quantity_of_words_with_specified_letters(text):
     pattern = r'\b[Nn][a-z]*ar[a-z]*'
     words = re.findall(pattern, text)
     return words
+
+
+def median_to_first_sunday(dct):
+    """
+    Computes the median of values for each month up to the first Sunday and returns a list of these medians.
+
+    Parameters:
+    dct (dict): A nested dictionary where:
+                - The first-level keys are strings in the format 'YYYY-MM', representing year and month.
+                - The second-level keys are strings representing days of the month.
+                - The third-level keys can be any strings.
+                - The third-level values are lists of numbers.
+
+    Returns:
+    list: A list of median values for each month up to the first Sunday.
+
+    Example:
+    input_dict = {
+        '2024-07': {
+            '1': {'key1': [10, 20], 'key2': [30]},
+            '2': {'key1': [40]},
+            '3': {'key1': [50, 60], 'key2': [70]},
+            '4': {'key1': [80]}
+        },
+        '2024-08': {
+            '5': {'key1': [15]},
+            '6': {'key2': [25, 35]},
+            '7': {'key1': [45]},
+            '8': {'key2': [55, 65]}
+        }
+    }
+    median_to_first_sunday(input_dict)
+    Output: [35.0, 25.0]
+    """
+
+    result = []
+
+    for key, second_level in dct.items():
+        new_list = []
+        year_month = [int(part) for part in key.split('-')]
+        first_day_of_month = datetime(year_month[0], year_month[1], 1)
+        first_sunday = first_day_of_month + timedelta(days=(6 - first_day_of_month.weekday()) % 7)
+        first_sunday_day = first_sunday.day
+
+        for second_key, third_level in second_level.items():
+            if not int(second_key) > first_sunday_day:
+                lst = [item for sublist in third_level.values() for item in sublist]
+                new_list.extend(lst)
+
+        if new_list:  # Sprawdź, czy new_list nie jest pusty przed obliczeniem mediany
+            median_value = statistics.median(new_list)
+            result.append(median_value)
+    return result
