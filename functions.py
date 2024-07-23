@@ -351,28 +351,29 @@ def median_to_first_sunday(dct):
     return statistics.median(all_values) if all_values else None
 
 
-def words_counter(text):
+def most_frequent_word_func(text):
     """
-    Counts the occurrences of each word in the given text and returns a dictionary with word counts.
+    Counts the occurrences of each word in the given text and returns a dictionary with the most frequently occurring word(s).
 
     The function processes the text as follows:
     1. Removes punctuation and digits.
     2. Converts the text to lowercase.
     3. Splits the text into individual words.
     4. Counts the occurrences of each word.
+    5. Identifies the word(s) with the highest count.
 
     Args:
         text (str): The input text in which words will be counted.
 
     Returns:
-        dict: A dictionary where the keys are words and the values are the counts of their occurrences.
+        dict: A dictionary where the keys are the most frequently occurring word(s) and the values are their counts.
 
     Examples:
-        >>> words_counter("This is a test. This is only a test.")
-        {'this': 2, 'is': 2, 'a': 2, 'test': 2, 'only': 1}
+        >>> most_frequent_word_func("This is a test. This is only a test.")
+        {'this': 2}
 
-        >>> words_counter("Python is great. Python is fun!")
-        {'python': 2, 'is': 2, 'great': 1, 'fun': 1}
+        >>> most_frequent_word_func("Python is great. Python is fun!")
+        {'python': 2, 'is': 2}
     """
     text = ((' '.join(re.findall(r'\b(\w+)[\W_0-9]*\b', text))).lower()).split()
     words = {}
@@ -382,4 +383,8 @@ def words_counter(text):
         else:
             words[word] += 1
 
-    return words
+    max_occurrence = max(words.values())
+    most_frequent_word = {key: value for key, value in words.items() if value == max_occurrence}
+
+    return most_frequent_word
+
