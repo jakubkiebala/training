@@ -349,3 +349,37 @@ def median_to_first_sunday(dct):
 
     # Calculate the median if the list is not empty
     return statistics.median(all_values) if all_values else None
+
+
+def words_counter(text):
+    """
+    Counts the occurrences of each word in the given text and returns a dictionary with word counts.
+
+    The function processes the text as follows:
+    1. Removes punctuation and digits.
+    2. Converts the text to lowercase.
+    3. Splits the text into individual words.
+    4. Counts the occurrences of each word.
+
+    Args:
+        text (str): The input text in which words will be counted.
+
+    Returns:
+        dict: A dictionary where the keys are words and the values are the counts of their occurrences.
+
+    Examples:
+        >>> words_counter("This is a test. This is only a test.")
+        {'this': 2, 'is': 2, 'a': 2, 'test': 2, 'only': 1}
+
+        >>> words_counter("Python is great. Python is fun!")
+        {'python': 2, 'is': 2, 'great': 1, 'fun': 1}
+    """
+    text = ((' '.join(re.findall(r'\b(\w+)[\W_0-9]*\b', text))).lower()).split()
+    words = {}
+    for word in text:
+        if not word in words:
+            words[word] = 1
+        else:
+            words[word] += 1
+
+    return words
