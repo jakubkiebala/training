@@ -297,7 +297,7 @@ def check_quantity_of_words_with_specified_letters(text):
 
 def median_to_first_sunday(dct):
     """
-    Computes the median of values for each month up to the first Sunday and returns a list of these medians.
+    Computes the median of all values in the dictionary up to the first Sunday of each month.
 
     Parameters:
     dct (dict): A nested dictionary where:
@@ -307,7 +307,7 @@ def median_to_first_sunday(dct):
                 - The third-level values are lists of numbers.
 
     Returns:
-    list: A list of median values for each month up to the first Sunday.
+    float: The median of all values up to the first Sunday of each month. If there are no values, returns None.
 
     Example:
     input_dict = {
@@ -325,24 +325,27 @@ def median_to_first_sunday(dct):
         }
     }
     median_to_first_sunday(input_dict)
-    Output: [35.0, 25.0]
+    Output: 40.0
     """
 
-    result = []
+    all_values = []
 
     for key, second_level in dct.items():
-        new_list = []
-        year_month = [int(part) for part in key.split('-')]
-        first_day_of_month = datetime(year_month[0], year_month[1], 1)
-        first_sunday = first_day_of_month + timedelta(days=(6 - first_day_of_month.weekday()) % 7)
+        # Split the key into year and month
+        year, month = map(int, key.split('-'))
+        first_day_of_month = datetime(year, month, 1)
+
+        # Calculate the first Sunday of the month
+        first_sunday = first_day_of_month + timedelta(days=(6 - first_day_of_month.weekday()))
+
         first_sunday_day = first_sunday.day
 
         for second_key, third_level in second_level.items():
-            if not int(second_key) > first_sunday_day:
-                lst = [item for sublist in third_level.values() for item in sublist]
-                new_list.extend(lst)
+            # If the second-level key is less than or equal to the first Sunday day
+            if int(second_key) <= first_sunday_day:
+                # Extend values directly into the list
+                for sublist in third_level.values():
+                    all_values.extend(sublist)
 
-        if new_list:  # Sprawdź, czy new_list nie jest pusty przed obliczeniem mediany
-            median_value = statistics.median(new_list)
-            result.append(median_value)
-    return result
+    # Calculate the median if the list is not empty
+    return statistics.median(all_values) if all_values else None
