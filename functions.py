@@ -1,5 +1,6 @@
 import re
 import statistics
+from collections import Counter
 from datetime import datetime, timedelta
 
 
@@ -375,16 +376,17 @@ def most_frequent_word_func(text):
         >>> most_frequent_word_func("Python is great. Python is fun!")
         {'python': 2, 'is': 2}
     """
-    text = ((' '.join(re.findall(r'\b(\w+)[\W_0-9]*\b', text))).lower()).split()
-    words = {}
-    for word in text:
-        if not word in words:
-            words[word] = 1
-        else:
-            words[word] += 1
+    # Remove punctuation and digits, convert to lowercase, and split into words
+    words = re.findall(r'\b\w+\b', text.lower())
 
-    max_occurrence = max(words.values())
-    most_frequent_word = {key: value for key, value in words.items() if value == max_occurrence}
+    # Count the occurrences of each word
+    word_counts = Counter(words)
+
+    # Find the maximum occurrence count
+    max_occurrence = max(word_counts.values())
+
+    # Create a dictionary with the most frequently occurring word(s)
+    most_frequent_word = {word: count for word, count in word_counts.items() if count == max_occurrence}
 
     return most_frequent_word
 
