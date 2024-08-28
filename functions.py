@@ -370,10 +370,10 @@ def most_frequent_word_func(text):
         dict: A dictionary where the keys are the most frequently occurring word(s) and the values are their counts.
 
     Examples:
-        >>> most_frequent_word_func("This is a test. This is only a test.")
+        most_frequent_word_func("This is a test. This is only a test.")
         {'this': 2}
 
-        >>> most_frequent_word_func("Python is great. Python is fun!")
+        most_frequent_word_func("Python is great. Python is fun!")
         {'python': 2, 'is': 2}
     """
     # Remove punctuation and digits, convert to lowercase, and split into words
@@ -389,4 +389,15 @@ def most_frequent_word_func(text):
     most_frequent_word = {word: count for word, count in word_counts.items() if count == max_occurrence}
 
     return most_frequent_word
+
+
+def new_func(sth):
+    new_word = ''
+    for i in range(0, len(sth)):
+        if i == len(sth) - 1:
+            new_word += f'{sth[i]}'
+        else:
+            new_word += f'{sth[i]} - '
+
+    return new_word
 
