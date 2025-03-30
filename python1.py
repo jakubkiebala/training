@@ -1,13 +1,15 @@
-def find_boundries(lst):
-    max_value = [None, None]
-    for l in lst:
-        if isinstance(l, (int, float)):
-            if max_value[0] == None or l < max_value[0]:
-                max_value[0] = l
-            elif max_value[1] == None or l > max_value[1]:
-                max_value[1] = l
-    return tuple(max_value)
+import string
 
-lst = [1, 4, 2, 10, 5, 'Jk', 55, 12, 0, 'Auu' ,100, 10, 13, 'AUU', -12]
-new_lst = find_boundries(lst)
-print(new_lst)
+def censor(words):
+    words_to_censor = {'beach', 'peach', 'ginger'}
+    new_words = words.split()
+    censored_text = []
+
+    for word in new_words:
+        cleared_word = word.strip(string.punctuation)
+        if cleared_word.lower() in words_to_censor:
+            censored_text.append(len(cleared_word) * '*')
+        else:
+            censored_text.append(word)
+    return ' '.join(censored_text)
+

@@ -401,3 +401,14 @@ def new_func(sth):
 
     return new_word
 
+
+def find_boundries(lst):
+    max_value = [None, None]
+    for l in lst:
+        if isinstance(l, (int, float)):
+            if max_value[0] == None or l < max_value[0]:
+                max_value[0] = l
+            elif max_value[1] == None or l > max_value[1]:
+                max_value[1] = l
+    return tuple(max_value)
+
