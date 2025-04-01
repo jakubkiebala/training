@@ -1,15 +1,19 @@
-import string
+import re
+import heapq
 
-def censor(words):
-    words_to_censor = {'beach', 'peach', 'ginger'}
-    new_words = words.split()
-    censored_text = []
+def summarize_text(text, num_sentences=3):
+    sentences = re.split(r'(?<=[.!?]) +', text)
 
-    for word in new_words:
-        cleared_word = word.strip(string.punctuation)
-        if cleared_word.lower() in words_to_censor:
-            censored_text.append(len(cleared_word) * '*')
-        else:
-            censored_text.append(word)
-    return ' '.join(censored_text)
+    word_frequencies = {}
+    for word in re.findall(r'\w+', text.lower()):
+        word_frequencies[word] = word_frequencies.get(word, 0) + 1
 
+    sentence_scores = {}
+    for sentence in sentences:
+        for word in sentence.lower().split():
+            if word in word_frequencies:
+                sentence_scores[sentence] = sentence_scores.get(sentence, 0) + word_frequencies[word]
+
+    summary_sentences = heapq.nlargest(num_sentences, sentence_scores, key=sentence_scores.get)
+
+    return " ".join(summary_sentences)
