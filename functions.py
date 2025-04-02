@@ -412,3 +412,23 @@ def find_boundries(lst):
                 max_value[1] = l
     return tuple(max_value)
 
+
+def safe_get(lst, index):
+    """Function to safe getting an element from the list
+    
+    Args:
+        lst: List
+        index: Intiger number
+    Returns:
+        Element of the list, with index of value of the number
+    Raises:
+        TypeError: When index has diffrent type than intiger
+        IndexError: When index is out of range
+    """
+    try:
+        return lst[index]
+    except TypeError:
+        print('Thats not a number')
+    except IndexError:
+        print('Bad index')
+    return None
