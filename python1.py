@@ -1,35 +1,28 @@
-def number_to_words(n):
-    ones = ["", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"]
-    teens = ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"]
-    tens = ["", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"]
-    hundreds = ["", "one hundred", "two hundred", "three hundred", "four hundred", "five hundred", "six hundred", "seven hundred", "eight hundred", "nine hundred"]
-    
-    if n == 0:
-        return "zero"
-    
-    result = ""
-    
-    if n >= 1000:
-        thousand = n // 1000
-        if thousand == 1:
-            result += "one thousand "
+class Calculator:
+    def __init__(self, name='user_calculator'):
+        self.name = name
+        self.memorized_operations = []
+
+
+    def add(self, num1, num2):
+        result = num1 + num2
+        message = f'added {num1} to {num2} got {result}'
+        self.memorized_operations.append(message)
+        print(message)
+
+
+    def multiply(self, num1, num2):
+        result = num1 * num2
+        message = f'multiplied {num1} with {num2} got {result}'
+        self.memorized_operations.append(message)
+        print(message)
+
+
+    def divide(self, num1, num2):
+        if num2 == 0:
+            print('You cant divide by zero')
         else:
-            result += number_to_words(thousand) + " thousand "
-        n %= 1000
-    
-    if n >= 100:
-        result += hundreds[n // 100] + " "
-        n %= 100
-    
-    if n >= 10 and n < 20:
-        result += teens[n - 10] + " "
-        return result.strip()
-    
-    if n >= 20:
-        result += tens[n // 10] + " "
-        n %= 10
-    
-    if n > 0:
-        result += ones[n] + " "
-    
-    return result.strip()
+            result = num1 / num2
+            message = f'divided {num1} by {num2} got {result}'
+            self.memorized_operations.append(message)
+            print(message)
