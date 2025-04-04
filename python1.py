@@ -10,6 +10,13 @@ class Calculator:
         self.memorized_operations.append(message)
         print(message)
 
+    
+    def subtract(self, num1, num2):
+        result = num1 - num2
+        message = f'subtracted {num1} from {num2} got {result}'
+        self.memorized_operations.append(message)
+        print(message)
+
 
     def multiply(self, num1, num2):
         result = num1 * num2
@@ -26,3 +33,8 @@ class Calculator:
             message = f'divided {num1} by {num2} got {result}'
             self.memorized_operations.append(message)
             print(message)
+
+
+calc = Calculator()
+calc.subtract(1, 3)
+
