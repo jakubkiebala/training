@@ -16,14 +16,6 @@ class Cart:
 
 
 class Discount20PercentCart(Cart):
-    def __init__(self):
-        super().__init__()
-
-    
-    def add(self, price, tag):
-        super().add(price, tag)
-
-    
     def summary(self):
         products_list = []
         for product in self.products:
@@ -33,3 +25,11 @@ class Discount20PercentCart(Cart):
         return print(f'your cart with a discount : {products_list}')
 
 
+class Above3ProductsCheapestFreeCart(Cart):
+    def summary(self):
+        if len(self.products) >= 3:
+            cheapest = min(self.products, key=lambda item: item[0])
+            products_list = [(0, name) if (price, name) == cheapest else (price, name) for price, name in self.products]
+            return print(f'your cart with cheapest for free : {products_list}')
+        else:
+            print(f'Your normal cart : {self.products}')
