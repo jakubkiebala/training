@@ -1,13 +1,16 @@
-class Shape:
-    def __init__(self, x, y, color):
-        self.color = color
-        self.center = (x, y)
-        self.description = ''
+class Cart:
+    def __init__(self):
+        self.products = []
+        
 
-    
-    def describe(self, description):
-        self.description = description
+    def add(self, price, tag):
+        if isinstance(price, (int, float)) and isinstance(tag, str):
+            product = (price, tag)
+            self.products.append(product)
+        else:
+            print('wrong data')
 
-    def __str__(self):
-        return f'Shape with color {self.color} o środku w punktach {self.center}'
-    
+
+    def summary(self):
+        return print(f'Your cart  includes : {self.products}')
+
