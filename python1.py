@@ -33,8 +33,3 @@ class Discount20PercentCart(Cart):
         return print(f'your cart with a discount : {products_list}')
 
 
-x = Discount20PercentCart()
-x.add(9, ' ta')
-x.add(10, 'warz')
-x.add(100, 'Ogor')
-x.summary()
